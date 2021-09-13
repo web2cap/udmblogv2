@@ -289,4 +289,5 @@ fabric.properties
 
 
 #SECRET KEY
-secret_key_file.py
+settings_key.py
+settings_db.py
