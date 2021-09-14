@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 try:
-    from udmblog.settings_key import SECRET_KEY
+    from udmblog.settings_secret_key import SECRET_KEY
 except ImportError:
     from django.utils.crypto import get_random_string
     from os import path
     SECRET_KEY = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
-    with open(path.join(BASE_DIR, 'udmblog', 'settings_key.py'), 'w') as key_file:
+    with open(path.join(BASE_DIR, 'udmblog', 'settings_secret_key.py'), 'w') as key_file:
         key_file.write("SECRET_KEY = '{key}'".format(key=SECRET_KEY))
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -38,6 +38,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'events.apps.EventsConfig',
+    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,12 +81,8 @@ WSGI_APPLICATION = 'udmblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+from udmblog.settings_db import DATABASES
+
 
 
 # Password validation
