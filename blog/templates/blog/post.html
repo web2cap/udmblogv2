@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>{{ blogentry.blog_title }}</title>
+    <style>
+        .navbar{
+            background-color: #2AAA8A; /*Jungle Green*/
+        }
+        .jumbotron {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            margin-bottom: 0;
+            background-color: #fff;
+          }
+          @media (min-width: 768px) {
+            .jumbotron {
+              padding-top: 6rem;
+              padding-bottom: 6rem;
+            }
+          }
+
+          .jumbotron p:last-child {
+            margin-bottom: 0;
+          }
+
+          .jumbotron h1 {
+            font-weight: 300;
+          }
+
+          .jumbotron .container {
+            max-width: 40rem;
+          }
+
+          footer {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+          }
+
+          footer p {
+            margin-bottom: .25rem;
+          }
+
+    </style>
+  </head>
+  <body>
+  <header>
+  <!-- MENU -->
+  <nav class="navbar fixed-top  navbar-expand-md navbar-dark mb-4 pt-0 pb-0">
+  <!-- Brand -->
+  <a class="navbar-brand pt-0" href="/">
+    <img src="/files/img/magnet.svg"
+         width="36" height="36"
+         class="d-inline-block align-top mr-1"
+         alt=""></a>
+  <a class="navbar-brand pt-3 mb-0" href="/">
+    web2cap.ru
+  </a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse  pt-3" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item">
+        <a class="nav-link active" href="/posts/">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/events/">Events</a>
+      </li>
+      <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle disabled" href="/about/" id="navbardrop" data-toggle="dropdown">
+            About
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/about/portfolio/">Portfolio</a>
+            <a class="dropdown-item" href="#">Link 2</a>
+            <a class="dropdown-item" href="#">Link 3</a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</nav>
+  <!-- /MENU -->
+</header>
+
+  <!-- CONTENT -->
+  <main role="main">
+  <section class="jumbotron">
+    <div class="container">
+      <h1>{{ blogentry.blog_title }}</h1>
+       <p class="text-muted">{{ blogentry.blog_date|date:"d.m.Y H:i" }}</p>
+       <p class="pb-5"><img src="{{ blogentry.blog_image.url }}" /> </p>
+       <p class="lead text-muted">{{ blogentry.blog_text }}</p>
+      <!--
+      <p>
+        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </p>
+      -->
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <section class="jumbotron text-center"><h4>Other posts</h4></section>
+      <div class="row">
+      {% for post in posts.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <a href="/posts/{{ post.id }}">{{ post.blog_title }}</a>
+            </div>
+            <a href="/posts/{{ post.id }}"><img src="{{ post.blog_image.url }}" class="card-img-top" /></a>
+            <div class="card-body">
+              <p class="card-text pb-0">{{ post.blog_text|slice:"128" }}{% if post.blog_text|length > 128 %}...{% endif %}</p>
+              <small class="text-muted pt-0">{{ post.blog_date|date:"d.m.Y H:i" }}</small>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/4.6/getting-started/introduction/">getting started guide</a>.</p>
+  </div>
+</footer>
+
+  <!-- /CONTENT -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  </body>
+</html>
